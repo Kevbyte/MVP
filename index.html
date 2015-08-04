@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link rel="stylesheet" type="text/css" href="/style.css" />
+      <!-- dependencies -->
+      <script src="bower_components/jquery/jquery.min.js"></script>
+      <script src="bower_components/underscore/underscore-min.js"></script>
+      <script src="twitter.js"></script>
+</head>
+
+<body>
+<center><h1>ZONE86CUP</h1></center>
+  <div class='navigation'>
+    <ul>
+      <li><form method="POST" action="/tires"> <button type="submit" class="button-tires"> Tires </button></form></li>
+      <li><form method="POST" action="/brakes"> <button type="submit" class="button-brakes"> Brakes </button></form></li>
+    </ul>
+  </div>
+
+<!--   <form method="POST" action="/tires"> <button type="submit" class="button"> Tires </button></form>
+  <form method="POST" action="/brakes"> <button type="submit" class="button"> Brakes </button></form> -->
+  <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        app.init();
+    });
+    
+  </script> 
+  <!-- doc.ready app.init -->
+</body>
+</html>
