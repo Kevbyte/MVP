@@ -13,9 +13,9 @@ var twit = new Twitter({
 
 
 
-var messages = [{
-  tweet: "Hella Savings at Auotzone!!!"
-}];
+var messages = [
+{tweet: "Hella Savings at Auotzone!!!"},
+{tweet: "wow what a deal"}];
 
 exports.handleRequest = function(request, response){
   console.log("Serving request type " + request.method + " for url " + request.url);
@@ -27,8 +27,24 @@ exports.handleRequest = function(request, response){
       // console.log("request.url= ", request.url)
       if(urlPath === "/"){
         var index = urlPath + 'index.html';
-        // console.log("index= ", index)
-        utils.serveAsset(response, index);
+
+          
+        // twit.get('search/tweets', {q: 'meow'}, function(error, tweets){
+        //   // console.log('tweets',tweets.statuses[0]);
+        //   for(var i=0; i<tweets.statuses.length; i++){
+        //     messages.push({
+        //       tweet: tweets.statuses[i].text
+        //     });
+             
+        //   }
+          utils.serveAsset(response, index);
+// 
+      
+
+
+        // utils.sendResponse(response, JSON.stringify(messages));
+        
+        
       }
       else if(urlPath==="/style.css"){
         var style = urlPath;
@@ -47,16 +63,10 @@ exports.handleRequest = function(request, response){
         utils.serveAsset4(response, under);
       }
       else if(urlPath==="/messages"){
-        twit.get('search/tweets', {q: 'meow'}, function(error, tweets, response){
-          // console.log(tweets.statuses[0]);
-          for(var i=0; i<tweets.statuses.length; i++){
-            messages.push({
-              tweet: tweets.statuses[i].text
-            });
-            // console.log(data);
-          }
-        });
-        utils.sendResponse(response, {results: messages});
+          console.log('messages',messages);
+
+       
+       
       }
     },
     'POST': function(request, response){
@@ -80,11 +90,17 @@ exports.handleRequest = function(request, response){
       utils.sendResponse4(response, "ok", 200);
     }
   };
-
   var action = actions[request.method];
-  if(action){
-    action(request, response);
-  }else{
-    sendResponse(response, "Not Found", 404);
-  }
+  setInterval(function(){
+    console.log('action')
+   
+    if(action){
+     
+        action(request, response);   
+ 
+    }else{
+      sendResponse(response, "Not Found", 404);
+    }
+    
+  },1000);
 };
